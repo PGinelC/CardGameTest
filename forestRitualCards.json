@@ -1,0 +1,22 @@
+{
+    "playCards":[
+        {"amount":1,"type":"ritual","name":"See","description":"Ritual Subject Reveals 1 card from their hand."},
+        {"amount":1,"type":"ritual","name":"Attack","description":"Ritual Subject receives loses up to 1 hand size."},
+        {"amount":1,"type":"ritual","name":"Defend","description":"Ritual Subject negatves 1 attack ritual."},
+        {"amount":1,"type":"ritual","name":"Heal","description":"Ritual Subject increases handsize by 1, draws a card."},
+        {"amount":1,"type":"ritual","name":"Death Seal","description":"attack rituals on Ritual Subject can remove as many cards as there are attack rituals."},
+        {"amount":1,"type":"ritual","name":"Discard","description":"Ritual Subject discards 1 card from their hand of their choice and draws 1 card."},
+        {"amount":1,"type":"ritual","name":"Cycle","description":"All players give a card of their choice to the next player in direction of play."},
+        {"amount":1,"type":"ritual","name":"Absolute Defense","description":"Ritual Subject negates all attack rituals."},
+        {"amount":1,"type":"ritual","name":"Vision","description":"Ritual Subject discards his hand and draws as many cards."},
+        {"amount":1,"type":"ritual","name":"Exodus","description":"All players discard their hand and draw as many cards."},
+        {"amount":1,"type":"ritual","name":"Mute","description":"Previous card revealed has no effect, if no previous card was revealed then the next card revealed has no effect."}
+    ],
+    "roleCards":[
+        {"amount":1, "type":"role", "name":"Cat Society", "description":"You are a proud member of the occult cat society, you must kill all bird coven members and the snake prophet."},
+        {"amount":1, "type":"role", "name":"Bird Coven", "description":"You are a proud member of the arcane bird coven, you must kill all cat society members and the snake prohpet."},
+        {"amount":1, "type":"role", "name":"Snake Prophet", "description":"You are the snake prophet, you must kill all cat society and bird coven members."},
+        {"amount":1, "type":"role", "name":"Harvey", "description":"You must survive until someone else meets their win condition, if you die, all players lose 1 hand size and must discard a card."},
+        {"amount":1, "type":"role", "name":"Rat Macabre", "description":"You must be the first one to die, if you do so you win the game."}
+    ]
+}
