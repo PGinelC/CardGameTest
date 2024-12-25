@@ -6,7 +6,7 @@ class ForestRitual extends Base {
     this.registeredPLayerRole = -1;
   }
 
-  async loadCards(path) {
+  async setCards(path) {
     const cardsData = await super.loadCards(path);
     cardsData["playCards"].forEach(card => {
         for (let i = 0; i < card.amount; i++) {
@@ -16,12 +16,14 @@ class ForestRitual extends Base {
     //roles are note necessry to load for now
   }
 
+  shuffleCards(){
+    this.drawPile = this.shuffle(this.drawPile);
+  }
+
   revealCards() {
+    this.play = this.shuffle(this.play);
     for (let i = 0; i < this.play.length; i++) {
       console.log(str(i) + this.play[i]);
-    }
-    while (this.drawPile.length > 0) {
-      this.discardPile.push(this.drawPile.pop());
     }
   }
 

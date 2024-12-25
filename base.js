@@ -6,7 +6,7 @@ class Base {
 
         this.playerNum = 2;
         this.registeredPlayer = -1;
-        this.playerHands = [];
+        this.playerHands = {};
 
         this.drawPile = [];
         this.discardPile = [];
@@ -14,19 +14,19 @@ class Base {
     }
 
     setGame(seed, playerNum, registeredPlayer) {
-        this.seed = Random(seed);
+        this.seed = new Random(seed);
         this.playerNum = playerNum;
         if (registeredPlayer >= playerNum){
             console.log("Invalid player number");
             return;
         }
-        this.playerHands = [[]*playerNum];
+        for (let i = 0; i < playerNum; i++) {
+            this.playerHands[i] = [];
+        }
         this.registeredPlayer = registeredPlayer;
-        //this.drawPile = this.createDeck();
-        //this.shuffleDeck(this.drawPile);
     }
 
-    draw(player){
+    drawCard(player){
         if (this.drawPile.length == 0){
             // add discard pile cards to draw pile
             while (this.discardPile.length > 0) {
@@ -38,7 +38,7 @@ class Base {
         this.playerHands[player].push(this.drawPile.pop());
     }
 
-    discard(player, card_num){
+    discardCard(player, card_num){
         this.discardPile.push(this.playerHands[player].pop(card_num));
     }
 
@@ -82,6 +82,12 @@ class Base {
             deck[randomIndex] = temporaryValue;
         }
         return deck;
+    }
+
+    newRound(){
+        while (this.drawPile.length > 0) {
+            this.discardPile.push(this.drawPile.pop());
+        }
     }
 
     async loadCards(path) {
