@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>Card Game Test</title>
+    <script src="./main.js" type="module"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Game Setup Section -->
+        <div class="section" id="setup">
+          <h3 class="section-title">Game Setup</h3>
+          <label>Seed:</label>
+          <input type="text" id="seedInput" value="1234">
+          <label>Players:</label>
+          <input type="number" id="playerNumInput" min="2" max="2" value="2">
+          <label>Your Player #:</label>
+          <input type="number" id="registeredPlayerInput" min="0" value="2">
+          <button id="startGameBtn">Start Game</button>
+        </div>
+    
+        <!-- Opponent Controls Section -->
+        <div class="section" id="opponentControls">
+          <h3 class="section-title">Opponent Controls</h3>
+          <button id="opponentDrawBtn">Draw</button>
+          <input type="number" id="opponentCardNum" class="card-num-input" min="1" max="5" value="1" placeholder="Card #">
+          <button id="opponentDiscardBtn">Discard</button>
+          <button id="opponentPlayBtn">Play Card</button>
+        </div>
+    
+        <!-- Play Area Section -->
+        <div class="section" id="playArea">
+          <h3 class="section-title">Play Area</h3>
+          <div id="playedCards">
+            <!-- Cards in play will be displayed here -->
+          </div>
+          <button id="revealCardsBtn">Reveal Cards</button>
+          <button id="nextRoundBtn">Next Round</button>
+        </div>
+    
+        <!-- Player Hand Section -->
+        <div class="section" id="playerHand">
+          <h3 class="section-title">Your Hand</h3>
+          <div id="handCards">
+            <!-- Example card structure -->
+            <div class="card">
+              <div class="card-name">Card Name</div>
+              <div class="card-description">Card description goes here...</div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Player Controls Section -->
+        <div class="section" id="playerControls">
+          <h3 class="section-title">Player Controls</h3>
+          <button id="playerDrawBtn">Draw</button>
+          <input type="number" id="playerCardNum" class="card-num-input" min="1" max="5" value="1" placeholder="Card #">
+          <button id="playerDiscardBtn">Discard</button>
+          <button id="playerPlayBtn">Play Card</button>
+        </div>
+      </div>
+</body>
+</html>
