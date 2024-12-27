@@ -19,7 +19,7 @@ class Display {
 
     createHiddenCardElement() {
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'card';
+        cardDiv.className = 'card-hidden';
         
         const nameDiv = document.createElement('div');
         nameDiv.className = 'card-name';
