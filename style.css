@@ -1,51 +1,104 @@
+body {
+    font-family: 'Cinzel', serif; /* Mystical, vintage-style font */
+    background-color: #f0e6d6; /* Dark earthy tone */
+    /* Light parchment tone */
+    margin: 0;
+    padding: 0;
+}
+
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    margin: auto;
+    max-width: 900px;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    border: 2px solid #735e44; /* Subtle wooden frame */
+    background-color: #f4e4c1; /* Parchment color */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
 }
 
 .section {
-    border: 1px solid #ccc;
-    padding: 15px;
     margin-bottom: 20px;
-    border-radius: 5px;
+    padding: 15px;
+    padding-top: 0px;
+    border: 1px solid #8a6e58;
+    background: linear-gradient(to bottom, #f4e4c1, #e9d6af); /* Parchment gradient */
+    border-radius: 8px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #7c5830;
+    position: relative;
+    padding: 0 10px;
+}
+
+.section-title:before, .section-title:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    width: 30%;
+    top: 50%;
+    background-color: #7c5830;
+}
+
+.section-title:before {
+    left: 0;
+}
+
+.section-title:after {
+    right: 0;
+}
+
+button {
+    background-color: #5e5242; /* Wooden tone */
+    border: none;
+    color: #f0e6d6;
+    padding: 10px 15px;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #7f6b57;
+}
+
+input {
+    background-color: #3a322c;
+    color: #f0e6d6;
+    border: 1px solid #735e44;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 .card {
-    border: 1px solid #666;
-    padding: 10px;
-    margin: 5px;
+    border: 1px solid #735e44;
+    background-color: #5a5048;
     display: inline-block;
     width: 120px;
-    border-radius: 3px;
+    color: #f0e6d6;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    font-family: 'Cinzel Decorative', serif;
 }
 
 .card-name {
-    font-weight: bold;
+    font-size: 1.2em;
     margin-bottom: 5px;
+    text-align: center;
+    color: #d4c2a8;
 }
 
 .card-description {
     font-size: 0.9em;
-    color: #666;
+    text-align: center;
 }
-
-button {
-    margin: 5px;
-    padding: 5px 10px;
-}
-
-input {
-    margin: 5px;
-    padding: 5px;
-}
-
-label {
-    margin-right: 5px;
-}
-/*
-.card-num-input {
-    border-left: 3px solid black;
-    margin-left: 5px;
-}*/
