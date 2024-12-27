@@ -21,9 +21,13 @@ class ForestRitual extends Base {
   }
 
   revealCards() {
-    this.play = this.shuffle(this.play);
-    for (let i = 0; i < this.play.length; i++) {
-      console.log(str(i) + this.play[i]);
+    if (this.play.length == 0) {
+        console.log("No cards to reveal");
+    } else {
+        this.play = this.shuffle(this.play);
+        for (let i = 0; i < this.play.length; i++) {
+            console.log(`Index: ${i}, Card: ${this.play[i].name}`);//, Description: ${this.play[i].description}
+        }
     }
   }
 

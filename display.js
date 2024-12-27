@@ -60,7 +60,7 @@ class Display {
                 const cardElement = this.createCardElement(card);
                 playArea.appendChild(cardElement);
             })
-    }   ;
+        };
     }
 }
 

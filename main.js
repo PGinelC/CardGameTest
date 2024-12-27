@@ -9,18 +9,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('startGameBtn').addEventListener('click', () => startGame());
 
     // Opponent control listeners
-    document.getElementById('opponentDrawBtn').addEventListener('click', () => opponentDraw(window.game));
+    document.getElementById('opponentDrawBtn').addEventListener('click', () => opponentDraw());
     document.getElementById('opponentDiscardBtn').addEventListener('click', () => {
         const cardNum = document.getElementById('opponentCardNum').value-1;
-        opponentDiscard(game, cardNum);
+        opponentDiscard(cardNum);
     });
     document.getElementById('opponentPlayBtn').addEventListener('click', () => {
         const cardNum = document.getElementById('opponentCardNum').value-1;
-        opponentPlay(game, cardNum);
+        opponentPlay(cardNum);
     });
 
     // Play area listeners
-    document.getElementById('revealCardsBtn').addEventListener('click', () => revealCards(window.game));
+    document.getElementById('revealCardsBtn').addEventListener('click', () => revealCards());
+    document.getElementById('nextRoundBtn').addEventListener('click', () => nextRound());
 
     // Player control listeners
     document.getElementById('playerDrawBtn').addEventListener('click', () => playerDraw());
@@ -42,55 +43,80 @@ function startGame() {
     window.game.setGame(seed, playerNum, registeredPlayer);
     window.game.setCards("forestRitualCards.json");
     window.game.shuffleCards();
+    window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
+    window.display.updatePlayArea(window.game.play, false);
     console.log("Game Started");
 }
 
 // Opponent actions
-function opponentDraw(game) {
-    const registeredPlayer = game.registeredPlayer;
-    const opponentPlayer = registeredPlayer === 1 ? 2 : 1;
-    game.drawCard(opponentPlayer);
-    //window.display.updateHandDisplay();
-    console.log(`Opponent Player ${opponentPlayer} drew a card`);
+function opponentDraw() {
+    const err = window.game.drawCard(window.game.opponentPlayer-1);
+    if (err != 0) {
+        console.log(`Player ${window.game.registeredPlayer} cannot draw a card`);
+    } else {
+        console.log(`Opponent Player ${window.game.opponentPlayer} drew a card`);
+        //window.display.updateHandDisplay();
+    }
 }
 
-function opponentDiscard(game, cardNum) {
-    const registeredPlayer = game.registeredPlayer;
-    const opponentPlayer = registeredPlayer === 1 ? 2 : 1;
-    game.discardCard(opponentPlayer, cardNum);
-    //window.display.updateHandDisplay();
-    console.log(`Opponent Player ${opponentPlayer} discarded their card number ${cardNum+1}`);
+function opponentDiscard(cardNum) {
+    const err = game.discardCard(window.game.opponentPlayer-1, cardNum);
+    if (err != 0) {
+        console.log(`Opponent Player ${window.game.opponentPlayer} cannot discard a card`);
+    } else {
+        console.log(`Opponent Player ${window.game.opponentPlayer} discarded their card number ${cardNum+1}`);
+        //window.display.updateHandDisplay();
+    }
 }
 
-function opponentPlay(game, cardNum) {
-    const registeredPlayer = game.registeredPlayer;
-    const opponentPlayer = registeredPlayer === 1 ? 2 : 1;
-    game.playCard(opponentPlayer, cardNum);
-    window.display.updatePlayArea(game.play, true);
-    console.log(`Opponent Player ${opponentPlayer} played their card number ${cardNum+1}`);
+function opponentPlay(cardNum) {
+    const err = game.playCard(window.game.opponentPlayer-1, cardNum);
+    if (err != 0) {
+        console.log(`Opponent Player ${window.game.opponentPlayer} cannot play a card`);
+    } else {
+        window.display.updatePlayArea(window.game.play, true);
+        console.log(`Opponent Player ${window.game.opponentPlayer} played their card number ${cardNum+1}`);
+    }
 }
 
   // Player actions
 function playerDraw() {
-    window.game.drawCard(window.game.registeredPlayer);
-    window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer]);
-    console.log(`Opponent Player ${window.game.registeredPlayer} drew a card`);
+    const err = window.game.drawCard(window.game.registeredPlayer-1);
+    if (err != 0) {
+        console.log(`Player ${window.game.registeredPlayer} cannot draw a card`);
+    } else {
+        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
+        console.log(`Player ${window.game.registeredPlayer} drew a card`);
+    }
 }
 
 function playerDiscard(cardNum) {
-    window.game.discardCard(window.game.registeredPlayer, cardNum);
-    window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer]);
-    console.log(`Opponent Player ${window.game.registeredPlayer} discarded their card number ${cardNum+1}`);
+    const err = window.game.discardCard(window.game.registeredPlayer-1, cardNum);
+    if (err != 0) {
+        console.log(`Player ${window.game.registeredPlayer} cannot discard a card`);
+    } else {
+        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
+        console.log(`Player ${window.game.registeredPlayer} discarded their card number ${cardNum+1}`);
+    }
 }
 
 function playerPlay(cardNum) {
-    window.game.playCard(window.game.registeredPlayer, cardNum);
-    window.display.updatePlayArea(window.game.play, true);
-    console.log(`Opponent Player ${window.game.registeredPlayer} played their card number ${cardNum+1}`);
+    const err = window.game.playCard(window.game.registeredPlayer-1, cardNum);
+    if (err != 0) {
+        console.log(`Player ${window.game.registeredPlayer} cannot play a card`);
+    } else {
+        window.display.updatePlayArea(window.game.play, true);
+        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
+        console.log(`Player ${window.game.registeredPlayer} played their card number ${cardNum+1}`);
+    }
 }
 
 function revealCards() {
     window.game.revealCards();
     window.display.updatePlayArea(window.game.play, false);
+}
+
+function nextRound(){
     window.game.newRound();
+    window.display.updatePlayArea(window.game.play, false);
 }
