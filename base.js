@@ -98,10 +98,10 @@ class Base {
   }
 
   shuffle(deck) {
-    let currentIndex = deck.length,
-      temporaryValue,
-      randomIndex;
-    while (0 !== currentIndex) {
+    let currentIndex = deck.length;
+    var temporaryValue;
+    var randomIndex;
+    while (0 < currentIndex) {
       randomIndex = Math.floor(this.seed.next() * currentIndex);
       currentIndex -= 1;
       temporaryValue = deck[currentIndex];

@@ -36,12 +36,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 //probably should be in base
-function startGame() {
+async function startGame() {
     const seed = document.getElementById('seedInput').value;
     const playerNum = document.getElementById('playerNumInput').value;
     const registeredPlayer = document.getElementById('registeredPlayerInput').value-1;
     window.game.setGame(seed, playerNum, registeredPlayer);
-    window.game.setCards("forestRitualCards.json");
+    await window.game.setCards("forestRitualCards.json");
+    console.log(window.game.drawPile.length);
     window.game.shuffleCards();
     window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
     window.display.updatePlayArea(window.game.play, false);

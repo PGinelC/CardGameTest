@@ -17,7 +17,7 @@ class ForestRitual extends Base {
   }
 
   shuffleCards(){
-    this.drawPile = this.shuffle(this.drawPile);
+    this.drawPile = super.shuffle(this.drawPile);
   }
 
   revealCards() {
