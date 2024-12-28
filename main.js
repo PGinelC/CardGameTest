@@ -10,14 +10,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Opponent control listeners
     document.getElementById('opponentDrawBtn').addEventListener('click', () => opponentDraw());
-    document.getElementById('opponentDiscardBtn').addEventListener('click', () => {
-        const cardNum = document.getElementById('opponentCardNum').value-1;
-        opponentDiscard(cardNum);
-    });
-    document.getElementById('opponentPlayBtn').addEventListener('click', () => {
-        const cardNum = document.getElementById('opponentCardNum').value-1;
-        opponentPlay(cardNum);
-    });
+    document.getElementById('opponentDiscardBtn').addEventListener('click', () =>opponentDiscard());
+    document.getElementById('opponentPlayBtn').addEventListener('click', () => opponentPlay());
 
     // Play area listeners
     document.getElementById('revealCardsBtn').addEventListener('click', () => revealCards());
@@ -25,14 +19,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Player control listeners
     document.getElementById('playerDrawBtn').addEventListener('click', () => playerDraw());
-    document.getElementById('playerDiscardBtn').addEventListener('click', () => {
-        const cardNum = document.getElementById('playerCardNum').value-1;
-        playerDiscard(cardNum);
-    });
-    document.getElementById('playerPlayBtn').addEventListener('click', () => {
-        const cardNum = document.getElementById('playerCardNum').value-1;
-        playerPlay(cardNum);
-    });
+    document.getElementById('playerDiscardBtn').addEventListener('click', () => playerDiscard());
+    document.getElementById('playerPlayBtn').addEventListener('click', () => playerPlay());
 });
 
 //probably should be in base
@@ -57,30 +45,36 @@ function opponentDraw() {
     } else {
         window.display.updateHandDisplay(window.game.playerHands[window.game.opponentPlayer-1], `opponentHandCards`, true);
         console.log(`Opponent Player ${window.game.opponentPlayer} drew a card`);
-        //window.display.updateHandDisplay();
     }
 }
 
-function opponentDiscard(cardNum) {
-    const err = game.discardCard(window.game.opponentPlayer-1, cardNum);
-    if (err != 0) {
-        console.log(`Opponent Player ${window.game.opponentPlayer} cannot discard a card`);
-    } else {
-        window.display.updateHandDisplay(window.game.playerHands[window.game.opponentPlayer-1], `opponentHandCards`, true);
-        console.log(`Opponent Player ${window.game.opponentPlayer} discarded their card number ${cardNum+1}`);
-        //window.display.updateHandDisplay();
-    }
+function opponentDiscard() {
+    const cardNum = window.display.getSelectedCardsNumber(0);
+    cardNum.sort((a, b) => b - a);
+    cardNum.forEach(num => {
+        const err = window.game.discardCard(window.game.opponentPlayer-1, num);
+        if (err != 0) {
+            console.log(`Opponent Player ${window.game.opponentPlayer} cannot discard a card`);
+        } else {
+            window.display.updateHandDisplay(window.game.playerHands[window.game.opponentPlayer-1], `opponentHandCards`, true);
+            console.log(`Opponent Player ${window.game.opponentPlayer} discarded their card number ${cardNum}`);
+        }
+    });
 }
 
-function opponentPlay(cardNum) {
-    const err = game.playCard(window.game.opponentPlayer-1, cardNum);
-    if (err != 0) {
-        console.log(`Opponent Player ${window.game.opponentPlayer} cannot play a card`);
+function opponentPlay() {
+    const cardNum = window.display.getSelectedCardsNumber(0);
+    cardNum.sort((a, b) => b - a);
+    cardNum.forEach(num => {
+        const err = window.game.playCard(window.game.opponentPlayer-1, num);
+        if (err != 0) {
+            console.log(`Opponent Player ${window.game.opponentPlayer} cannot play a card`);
     } else {
         window.display.updatePlayArea(window.game.play, true);
         window.display.updateHandDisplay(window.game.playerHands[window.game.opponentPlayer-1], `opponentHandCards`, true);
-        console.log(`Opponent Player ${window.game.opponentPlayer} played their card number ${cardNum+1}`);
-    }
+        console.log(`Opponent Player ${window.game.opponentPlayer} played their card number ${cardNum}`);
+        }
+    });
 }
 
   // Player actions
@@ -94,25 +88,33 @@ function playerDraw() {
     }
 }
 
-function playerDiscard(cardNum) {
-    const err = window.game.discardCard(window.game.registeredPlayer-1, cardNum);
-    if (err != 0) {
-        console.log(`Player ${window.game.registeredPlayer} cannot discard a card`);
-    } else {
-        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1], `handCards`, false);
-        console.log(`Player ${window.game.registeredPlayer} discarded their card number ${cardNum+1}`);
-    }
+function playerDiscard() {
+    const cardNum = window.display.getSelectedCardsNumber(1);
+    cardNum.sort((a, b) => b - a);
+    cardNum.forEach(num => {
+        const err = window.game.discardCard(window.game.registeredPlayer-1, num);
+        if (err != 0) {
+            console.log(`Player ${window.game.registeredPlayer} cannot discard card number ${num}`);
+        } else {
+            window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1], `handCards`, false);
+            console.log(`Player ${window.game.registeredPlayer} discarded their card number ${num}`);
+        }
+    });
 }
 
-function playerPlay(cardNum) {
-    const err = window.game.playCard(window.game.registeredPlayer-1, cardNum);
-    if (err != 0) {
-        console.log(`Player ${window.game.registeredPlayer} cannot play a card`);
-    } else {
-        window.display.updatePlayArea(window.game.play, true);
-        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1], `handCards`, false);
-        console.log(`Player ${window.game.registeredPlayer} played their card number ${cardNum+1}`);
-    }
+function playerPlay() {
+    const cardNum = window.display.getSelectedCardsNumber(1);
+    cardNum.sort((a, b) => b - a);
+    cardNum.forEach(num => {
+        const err = window.game.playCard(window.game.registeredPlayer-1, num);
+        if (err != 0) {
+            console.log(`Player ${window.game.registeredPlayer} cannot play a card`);
+        } else {
+            window.display.updatePlayArea(window.game.play, true);
+            window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1], `handCards`, false);
+            console.log(`Player ${window.game.registeredPlayer} played their card number ${num}`);
+        }
+    });
 }
 
 function revealCards() {

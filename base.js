@@ -48,7 +48,7 @@ class Base {
     if (!this.playerHands[player] || this.playerHands[player].length == 0) {
         return -1;
     } else {
-        this.discardPile.push(this.playerHands[player].pop(card_num));
+        this.discardPile.push(this.playerHands[player].splice(card_num, 1)[0]);
         return 0;
     }
   }
@@ -65,7 +65,7 @@ class Base {
     if (!this.playerHands[player] || this.playerHands[player].length == 0) {
       return -1;
     } else {
-      this.play.push(this.playerHands[player].pop(card_num));
+      this.play.push(this.playerHands[player].splice(card_num, 1)[0]);
       return 0;
     }
   }
