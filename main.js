@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.log('Document fully loaded and parsed');
     window.game = new ForestRitual();
     window.display = new Display();
+    // global var to check the round state and prevent actions
+    window.reading = false;
+
     // Game setup listeners
     document.getElementById('startGameBtn').addEventListener('click', () => startGame());
 
@@ -26,8 +29,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 //probably should be in base
 async function startGame() {
     const seed = document.getElementById('seedInput').value;
-    const playerNum = document.getElementById('playerNumInput').value;
-    const registeredPlayer = document.getElementById('registeredPlayerInput').value-1;
+    //const playerNum = document.getElementById('playerNumInput').value;
+    const playerNum = 2;
+    //const registeredPlayer = document.getElementById('registeredPlayerInput').value-1;
+    const registeredPlayer = 1;
     window.game.setGame(seed, playerNum, registeredPlayer);
     await window.game.setCards("forestRitualCards.json");
     console.log(window.game.drawPile.length);
@@ -63,6 +68,7 @@ function opponentDiscard() {
 }
 
 function opponentPlay() {
+    if (window.reading) return;
     const cardNum = window.display.getSelectedCardsNumber(0);
     cardNum.sort((a, b) => b - a);
     cardNum.forEach(num => {
@@ -103,6 +109,7 @@ function playerDiscard() {
 }
 
 function playerPlay() {
+    if (window.reading) return;
     const cardNum = window.display.getSelectedCardsNumber(1);
     cardNum.sort((a, b) => b - a);
     cardNum.forEach(num => {
@@ -118,11 +125,13 @@ function playerPlay() {
 }
 
 function revealCards() {
+    window.reading = true;
     window.game.revealCards();
     window.display.updatePlayArea(window.game.play, false);
 }
 
 function nextRound(){
+    window.reading = false;
     window.game.newRound();
     window.display.updatePlayArea(window.game.play, false);
 }

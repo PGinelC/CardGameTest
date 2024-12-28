@@ -7,6 +7,7 @@ class ForestRitual extends Base {
   }
 
   async setCards(path) {
+    this.drawPile = [];
     const cardsData = await super.loadCards(path);
     cardsData["playCards"].forEach(card => {
         for (let i = 0; i < card.amount; i++) {
