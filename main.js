@@ -29,10 +29,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 //probably should be in base
 async function startGame() {
     const seed = document.getElementById('seedInput').value;
-    //const playerNum = document.getElementById('playerNumInput').value;
-    const playerNum = 2;
-    //const registeredPlayer = document.getElementById('registeredPlayerInput').value-1;
-    const registeredPlayer = 1;
+    const playerNum = 2; //const playerNum = document.getElementById('playerNumInput').value;
+    const registeredPlayer = 1; //const registeredPlayer = document.getElementById('registeredPlayerInput').value-1;
     window.game.setGame(seed, playerNum, registeredPlayer);
     await window.game.setCards("forestRitualCards.json");
     console.log(window.game.drawPile.length);
