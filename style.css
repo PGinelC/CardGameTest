@@ -83,6 +83,7 @@ input {
     background-color: #2d5028;
     display: inline-block;
     width: 120px;
+    height: 180px;
     color: #f0e6d6;
     padding: 10px;
     margin: 5px;
@@ -91,17 +92,38 @@ input {
     font-family: 'Cinzel Decorative', serif;
 }
 
+#handCards,
+#opponentHandCards,
+#playedCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card,
+.card-hidden {
+  width: calc(15% - 5px);
+  height: 200px;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  font-family: 'Cinzel Decorative', serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card{
+    border: 1px solid #735e44;
+    background-color: #2d5028;
+}
+
+
 .card-hidden {
     border: 1px solid #735e44;
     background-color: #50282b;
-    display: inline-block;
-    width: 120px;
-    color: #f0e6d6;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-    font-family: 'Cinzel Decorative', serif;
 }
 
 .card-name {
@@ -115,3 +137,87 @@ input {
     font-size: 0.9em;
     text-align: center;
 }
+
+/* Base styles remain the same */
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .container {
+      max-width: 100%;
+      padding: 10px;
+      margin: 0;
+      border: none;
+      box-shadow: none;
+    }
+  
+    .section {
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+  
+    .section-title {
+      font-size: 1.2em;
+    }
+  
+    .section-title:before,
+    .section-title:after {
+      width: 20%;
+    }
+  
+    button {
+      padding: 12px 15px;
+      width: 100%;
+      margin: 5px 0;
+      font-size: 16px;
+    }
+  
+    input {
+      width: 100%;
+      margin: 5px 0;
+      padding: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+  
+    #handCards,
+    #opponentHandCards,
+    #playedCards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+  
+    .card,
+    .card-hidden {
+      width: calc(33.33% - 20px);
+      height: 180px;
+      margin: 5px;
+      font-size: 0.9em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .card-name {
+      font-size: 1em;
+    }
+  
+    .card-description {
+      font-size: 0.8em;
+    }
+  
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+  }
+  
+  /* Small mobile devices */
+  @media screen and (max-width: 480px) {
+    .card,
+    .card-hidden {
+      width: calc(50% - 20px);
+      height: 200px;
+    }
+  }
