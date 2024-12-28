@@ -35,13 +35,19 @@ class Display {
         return cardDiv;
     }
 
-    updateHandDisplay(cards) {
-        const handContainer = document.getElementById('handCards');
+    updateHandDisplay(cards, tag, hidden) {
+        const handContainer = document.getElementById(tag);
         handContainer.innerHTML = '';
         
         cards.forEach(card => {
-            const cardElement = this.createCardElement(card);
-            handContainer.appendChild(cardElement);
+            if (hidden) {
+                const cardElement = this.createHiddenCardElement(card);
+                handContainer.appendChild(cardElement);
+                return;
+            } else {
+                const cardElement = this.createCardElement(card);
+                handContainer.appendChild(cardElement);
+            }
         });
     }
 

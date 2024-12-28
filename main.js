@@ -55,6 +55,7 @@ function opponentDraw() {
     if (err != 0) {
         console.log(`Player ${window.game.registeredPlayer} cannot draw a card`);
     } else {
+        window.display.updateHandDisplay(window.game.playerHands[window.game.opponentPlayer-1], `opponentHandCards`, true);
         console.log(`Opponent Player ${window.game.opponentPlayer} drew a card`);
         //window.display.updateHandDisplay();
     }
@@ -65,6 +66,7 @@ function opponentDiscard(cardNum) {
     if (err != 0) {
         console.log(`Opponent Player ${window.game.opponentPlayer} cannot discard a card`);
     } else {
+        window.display.updateHandDisplay(window.game.playerHands[window.game.opponentPlayer-1], `opponentHandCards`, true);
         console.log(`Opponent Player ${window.game.opponentPlayer} discarded their card number ${cardNum+1}`);
         //window.display.updateHandDisplay();
     }
@@ -76,6 +78,7 @@ function opponentPlay(cardNum) {
         console.log(`Opponent Player ${window.game.opponentPlayer} cannot play a card`);
     } else {
         window.display.updatePlayArea(window.game.play, true);
+        window.display.updateHandDisplay(window.game.playerHands[window.game.opponentPlayer-1], `opponentHandCards`, true);
         console.log(`Opponent Player ${window.game.opponentPlayer} played their card number ${cardNum+1}`);
     }
 }
@@ -86,7 +89,7 @@ function playerDraw() {
     if (err != 0) {
         console.log(`Player ${window.game.registeredPlayer} cannot draw a card`);
     } else {
-        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
+        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1], `handCards`, false);
         console.log(`Player ${window.game.registeredPlayer} drew a card`);
     }
 }
@@ -96,7 +99,7 @@ function playerDiscard(cardNum) {
     if (err != 0) {
         console.log(`Player ${window.game.registeredPlayer} cannot discard a card`);
     } else {
-        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
+        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1], `handCards`, false);
         console.log(`Player ${window.game.registeredPlayer} discarded their card number ${cardNum+1}`);
     }
 }
@@ -107,7 +110,7 @@ function playerPlay(cardNum) {
         console.log(`Player ${window.game.registeredPlayer} cannot play a card`);
     } else {
         window.display.updatePlayArea(window.game.play, true);
-        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1]);
+        window.display.updateHandDisplay(window.game.playerHands[window.game.registeredPlayer-1], `handCards`, false);
         console.log(`Player ${window.game.registeredPlayer} played their card number ${cardNum+1}`);
     }
 }
